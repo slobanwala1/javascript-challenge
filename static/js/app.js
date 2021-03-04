@@ -12,17 +12,17 @@ function updateTable(data) {
   data.forEach(function(alien_sighting) {
     updated_tRow = tbody.append("tr")
     Object.entries(alien_sighting).forEach(function([key, value]) {
+      //console.log(key+value);
       updated_tData = updated_tRow.append("td").text(value);
     })
   })
 }
 
 function filterData(data, htmlName, fieldName) {
-  return tableData.filter(ufo_sighting => {
-    console.log(ufo_sighting.htmlName);
-    console.log(data.property("value"));
-    ufo_sighting.htmlName === data.property("value") || !data.property("value");
+  var filteredData = tableData.filter(ufo_sighting => {
+    return ufo_sighting[htmlName] === data.property("value")
   })
+  return filteredData
 }
 
 updateTable(tableData);
@@ -39,7 +39,8 @@ filterButton.on("click", function() {
   var stateEntered = d3.select("#state");
   var cityEntered = d3.select("#city");
   var ufoTypeEntered = d3.select("#shape");
-
+  // console.log(dateEntered.property("value"));
   filteredField = filterData(dateEntered, "datetime", "dateEntered");
+  console.log(filteredField);
   updateTable(filteredField);
 })

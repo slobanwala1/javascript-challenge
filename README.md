@@ -38,3 +38,7 @@ statement for resets on the filter, etc. Here's how the finished product looks:
 <br>
 <br>
 <img src="https://github.com/slobanwala1/javascript-challenge/blob/main/static/images/threefilter.PNG" width="500">
+
+
+In conclusion this project was really interesting and allowed me to think outside the box in making the logic a little more generic so in the
+future adding more filters wouldn't be difficult with the data. Thanks for the opportunity to do this hw.

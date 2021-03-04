@@ -1,6 +1,7 @@
 // from data.js
 var tableData = data;
-var tableCopy = data;
+// Copy that gets manipulated each time
+var modifiedTableCopy = data;
 var resetCounter = 0;
 
 // use tbody tag to group body content
@@ -16,27 +17,31 @@ function updateTable(data) {
   })
 }
 
-function filterData(data, htmlName, fieldName) {
+function filterData(fullData, data, htmlName, fieldName) {
   if ((data.property("value") === undefined || data.property("value").length == 0)) {
     return null;
   }
-  var filteredData = tableData.filter(ufo_sighting => {
+  modifiedTableCopy = fullData.filter(ufo_sighting => {
     return ufo_sighting[htmlName] === data.property("value");
   })
-  return filteredData;
+  return modifiedTableCopy;
 }
 
 // Get a fresh copy of original data and display it
 function resetData() {
-  return tableCopy;
+  modifiedTableCopy = tableData;
+  return modifiedTableCopy;
 }
 
-updateTable(tableData);
+
 
 // filter/submit button logic
 var filterButton = d3.select("#filter-btn");
 
 filterButton.on("click", function() {
+  console.log('hit here');
+  resetTable = resetData();
+  updateTable(resetTable);
   // We don't want page to refresh instead we want data to update.
   d3.event.preventDefault();
 
@@ -51,7 +56,7 @@ filterButton.on("click", function() {
   var i = 0;
 
   fieldArr.forEach((element) => {
-    filteredField = filterData(element, htmlFieldArr[i], fieldStringArr[i]);
+    filteredField = filterData(modifiedTableCopy, element, htmlFieldArr[i], fieldStringArr[i]);
     if (filteredField != null) {
       updateTable(filteredField);
     } else {
@@ -69,3 +74,5 @@ filterButton.on("click", function() {
   }
 
 })
+
+updateTable(tableData);

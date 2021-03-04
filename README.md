@@ -9,8 +9,32 @@ statement for resets on the filter, etc. Here's how the finished product looks:
 
 ## Here are the snapshots and analysis:
 
-**Temperature (F) vs. Latitude**
+**No Filter**
 
 <br>
 <br>
-<img src="https://github.com/slobanwala1/python-api-challenge/blob/main/my_submission/Images/output_data/Fig1.png" width="500">
+<img src="https://github.com/slobanwala1/javascript-challenge/blob/main/static/images/nofilter.PNG" width="500">
+
+**One Filter**
+
+<br>
+<br>
+<img src="https://github.com/slobanwala1/javascript-challenge/blob/main/static/images/onefilter.PNG" width="500">
+
+**Two Filters**
+
+<br>
+<br>
+<img src="https://github.com/slobanwala1/javascript-challenge/blob/main/static/images/twofilter.PNG" width="500">
+
+**Two Filters with shape**
+
+<br>
+<br>
+<img src="https://github.com/slobanwala1/javascript-challenge/blob/main/static/images/twofilterShape.PNG" width="500">
+
+**Three Filters**
+
+<br>
+<br>
+<img src="https://github.com/slobanwala1/javascript-challenge/blob/main/static/images/threefilter.PNG" width="500">

@@ -8,7 +8,6 @@ tbody = d3.select("tbody")
 
 function updateTable(data) {
   tbody.text("");
-
   data.forEach(function(alien_sighting) {
     updated_tRow = tbody.append("tr")
     Object.entries(alien_sighting).forEach(function([key, value]) {
@@ -18,10 +17,7 @@ function updateTable(data) {
 }
 
 function filterData(data, htmlName, fieldName) {
-  console.log('new data:');
-  console.log(data.property("value"));
   if ((data.property("value") === undefined || data.property("value").length == 0)) {
-    console.log('data is empty');
     return null;
   }
   var filteredData = tableData.filter(ufo_sighting => {
@@ -63,40 +59,6 @@ filterButton.on("click", function() {
     }
     i++;
   });
-
-  // filteredField = filterData(dateEntered, "datetime", "dateEntered");
-  // if (filteredField != null) {
-  //   updateTable(filteredField);
-  // } else {
-  //   resetCounter++;
-  // }
-  // filteredField = filterData(countryEntered, "country", "countryEntered");
-  // if (filteredField != null) {
-  //   updateTable(filteredField);
-  // } else {
-  //   resetCounter++;
-  // }
-  //
-  // filteredField = filterData(stateEntered, "state", "stateEntered");
-  // if (filteredField != null) {
-  //   updateTable(filteredField);
-  // } else {
-  //   resetCounter++;
-  // }
-  //
-  // filteredField = filterData(cityEntered, "city", "cityEntered");
-  // if (filteredField != null) {
-  //   updateTable(filteredField);
-  // } else {
-  //   resetCounter++;
-  // }
-  //
-  // filteredField = filterData(ufoTypeEntered, "shape", "ufoTypeEntered");
-  // if (filteredField != null) {
-  //   updateTable(filteredField);
-  // } else {
-  //   resetCounter++;
-  // }
 
   if (resetCounter == 5) {
     freshData = resetData();

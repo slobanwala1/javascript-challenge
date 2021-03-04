@@ -1,6 +1,8 @@
 // from data.js
 var tableData = data;
-
+var tableCopy = data;
+var resetCounter = 0;
+var resetFlag = false;
 // YOUR CODE HERE!
 // use tbody tag to group body content
 tbody = d3.select("tbody")
@@ -19,11 +21,33 @@ function updateTable(data) {
 }
 
 function filterData(data, htmlName, fieldName) {
+  console.log('new data:');
+  console.log(data.property("value"));
+  if ((data.property("value") === undefined || data.property("value").length == 0) && resetFlag == false) {
+    console.log('data is empty');
+    return null;
+  }
   var filteredData = tableData.filter(ufo_sighting => {
-    return ufo_sighting[htmlName] === data.property("value")
+    return ufo_sighting[htmlName] === data.property("value");
   })
-  return filteredData
+  // console.log(filteredData);
+  return filteredData;
 }
+
+function resetData() {
+  return tableCopy;
+}
+// var filterInputs = d3.selectAll('.form-control');
+// function clearData() {
+//   filters = {};
+//
+//       // Sets every input field to empty
+//       filterInputs._groups[0].forEach(entry => {
+//           if (entry.value != 0) {
+//               d3.select('#' + entry.id).node().value = "";
+//           }
+//       });
+// }
 
 updateTable(tableData);
 
@@ -41,6 +65,54 @@ filterButton.on("click", function() {
   var ufoTypeEntered = d3.select("#shape");
   // console.log(dateEntered.property("value"));
   filteredField = filterData(dateEntered, "datetime", "dateEntered");
-  console.log(filteredField);
-  updateTable(filteredField);
+  if (filteredField != null) {
+    console.log('1');
+    updateTable(filteredField);
+  } else {
+    resetCounter++;
+  }
+  filteredField = filterData(countryEntered, "country", "countryEntered");
+  if (filteredField != null) {
+    console.log('2');
+    updateTable(filteredField);
+  } else {
+    resetCounter++;
+  }
+
+  filteredField = filterData(stateEntered, "state", "stateEntered");
+  if (filteredField != null) {
+    console.log('3');
+    updateTable(filteredField);
+  } else {
+    resetCounter++;
+  }
+
+  filteredField = filterData(cityEntered, "city", "cityEntered");
+  if (filteredField != null) {
+    console.log('4');
+    updateTable(filteredField);
+  } else {
+    resetCounter++;
+  }
+
+  filteredField = filterData(ufoTypeEntered, "shape", "ufoTypeEntered");
+  if (filteredField != null) {
+    console.log('5');
+    updateTable(filteredField);
+  } else {
+    resetCounter++;
+  }
+
+  if (resetCounter == 5) {
+    console.log('reset data');
+    resetFlag = true;
+    freshData = resetData();
+    updateTable(freshData);
+    resetCounter = 0;
+    resetFlag = false;
+  } else {
+    resetCounter = 0;
+    resetFlag = false;
+  }
+
 })
